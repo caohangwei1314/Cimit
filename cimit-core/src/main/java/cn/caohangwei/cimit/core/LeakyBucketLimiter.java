@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import cn.caohangwei.cimit.common.DefaultLimiterRule;
+import cn.caohangwei.cimit.common.DefaultCimitRule;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class LeakyBucketLimiter extends AbstractLimiter {
     private int rate;
 
     public LeakyBucketLimiter() {
-        this(DefaultLimiterRule.CAPACITY, DefaultLimiterRule.RATE, DefaultLimiterRule.TIME_UNIT);
+        this(DefaultCimitRule.CAPACITY, DefaultCimitRule.RATE, DefaultCimitRule.TIME_UNIT);
     }
 
     public LeakyBucketLimiter(int capacity, int rate, TimeUnit timeUnit) {
