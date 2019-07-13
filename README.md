@@ -1,5 +1,8 @@
 # Cimit : Application Current Limit
 
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Author](https://img.shields.io/badge/Author-PinuoC-67C23A.svg)](https://caohangwei.cn/)
+
 ## 介绍
 面对高并发问题时，我们一般有三种应对策略，缓存、降级和限流。当系统的资源量不足以响应请求量时，大量的请求访问会导致系统直接被压垮，为了保证有限的资源能够正常服务，同时尽可能提升系统的吞吐量，那么限流就是一个重要的手段。
 
@@ -29,6 +32,13 @@ if (limiter.acquire()) {
     System.out.println("Hello Cimit!");
 }
 ```
+
+## 待办事项
+
+- [ ] 分布式限流
+- [ ] 手动开关
+- [ ] 实时监控
+- [ ] 性能优化
 
 ## 关于作者
 
