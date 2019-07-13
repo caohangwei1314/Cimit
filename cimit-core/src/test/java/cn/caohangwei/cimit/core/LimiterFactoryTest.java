@@ -8,7 +8,7 @@ class LimiterFactoryTest {
 
     @Test
     void getLeakyBucketLimiter() {
-        LeakyBucketLimiter limiter = (LeakyBucketLimiter) LimiterFactory.getLeakyBucketLimiter();
+        LeakyBucketLimiter limiter = (LeakyBucketLimiter) LimiterFactory.getLeakyBucketLimiter("Cimit");
         for (int i = 0; i < 20; i++) {
             new Thread(() -> {
                 if (limiter.tryAcquire()) {

@@ -1,5 +1,6 @@
 package cn.caohangwei.cimit.core;
 
+import cn.caohangwei.cimit.common.CimitRule;
 import org.junit.jupiter.api.Test;
 
 
@@ -9,7 +10,7 @@ class LeakyBucketLimiterTest {
 
     @Test
     void acquire() {
-        LeakyBucketLimiter limiter = new LeakyBucketLimiter(10,1, TimeUnit.NANOSECONDS);
+        LeakyBucketLimiter limiter = (LeakyBucketLimiter) LimiterFactory.getLeakyBucketLimiter("Cimit");
         for(int i=0;i<20;i++){
             new Thread(()->{
                 if(limiter.acquire()){
