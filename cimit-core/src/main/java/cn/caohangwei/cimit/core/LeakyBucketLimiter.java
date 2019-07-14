@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import cn.caohangwei.cimit.common.DefaultCimitRule;
+import cn.caohangwei.cimit.common.LimiterRule;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,46 +18,27 @@ import org.slf4j.LoggerFactory;
  */
 public class LeakyBucketLimiter extends AbstractLimiter {
 
-    private static Logger logger = LoggerFactory.getLogger(LeakyBucketLimiter.class);
-
     private AtomicInteger water = new AtomicInteger(0);
 
-    private static final Lock LOCK = new ReentrantLock();
+    private LimiterRule rule;
 
-    private ScheduledExecutorService executor;
-
-    private TimeUnit timeUnit;
-
-    private int capacity;
-
-    private int rate;
-
-    public LeakyBucketLimiter() {
-        this(DefaultCimitRule.CAPACITY, DefaultCimitRule.RATE, DefaultCimitRule.TIME_UNIT);
+    public LeakyBucketLimiter(LimiterRule rule) {
+        this.rule = rule;
     }
 
-    public LeakyBucketLimiter(int capacity, int rate, TimeUnit timeUnit) {
-        this.capacity = capacity;
-        this.rate = rate;
-        this.timeUnit = timeUnit;
-        this.executor = new ScheduledThreadPoolExecutor(1, new ThreadFactoryBuilder().setNameFormat("WaterScheduled").build());
-        executor.scheduleAtFixedRate(() -> {
-            try {
-                LOCK.lock();
-                water.set(Math.max(0, water.get() - rate));
-            } catch (Exception e) {
-                logger.debug("Water Decrement Error: " + e.getMessage());
-            } finally {
-                LOCK.unlock();
-            }
-        }, 0, 1, timeUnit);
+    public AtomicInteger getWater() {
+        return water;
+    }
+
+    public LimiterRule getRule() {
+        return rule;
     }
 
     @Override
     public boolean acquire() {
         while (true) {
             int size = water.get();
-            if (size < capacity) {
+            if (size < rule.getCapacity()) {
                 if (water.compareAndSet(size, size + 1)) {
                     return true;
                 }
@@ -68,7 +49,7 @@ public class LeakyBucketLimiter extends AbstractLimiter {
     @Override
     public boolean tryAcquire() {
         int size = water.get();
-        if (size < capacity) {
+        if (size < rule.getCapacity()) {
             return water.compareAndSet(size, size + 1);
         } else {
             return false;

@@ -2,7 +2,7 @@ package cn.caohangwei.cimit.common;
 
 import java.util.concurrent.TimeUnit;
 
-public class CimitRule {
+public class LimiterRule {
 
     String name;
 
@@ -10,16 +10,19 @@ public class CimitRule {
 
     int rate;
 
+    int period;
+
     TimeUnit timeUnit;
 
-    public CimitRule(String name){
+    public LimiterRule(String name) {
         this.name = name;
         this.capacity = Constants.DEFAULT_CAPACITY;
         this.rate = Constants.DEFAULT_RATE;
+        this.period = Constants.DEFAULT_PERIOD;
         this.timeUnit = Constants.DEFAULT_TIME_UNIT;
     }
 
-    public CimitRule(String name,int capacity,int rate,TimeUnit timeUnit){
+    public LimiterRule(String name, int capacity, int rate, int period, TimeUnit timeUnit) {
         this.name = name;
         this.capacity = capacity;
         this.rate = rate;
@@ -50,6 +53,14 @@ public class CimitRule {
         this.rate = rate;
     }
 
+    public int getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
     public TimeUnit getTimeUnit() {
         return timeUnit;
     }
@@ -64,6 +75,7 @@ public class CimitRule {
                 "name=" + name +
                 ", capacity=" + capacity +
                 ", rate=" + rate +
+                ", period=" + period +
                 ", timeUnit=" + timeUnit +
                 "}";
     }
