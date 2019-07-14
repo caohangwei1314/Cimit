@@ -20,8 +20,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class LimiterFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(LimiterFactory.class);
-
     private static volatile Map<String, AbstractLimiter> limiterMap = new ConcurrentHashMap<>();
 
     private static ScheduledExecutorService executor;
@@ -30,8 +28,8 @@ public class LimiterFactory {
         init();
     }
 
-    private static void init(){
-        executor = new ScheduledThreadPoolExecutor(limiterMap.size(),new ThreadFactoryBuilder().setNameFormat("WaterScheduler").build());
+    private static void init() {
+        executor = new ScheduledThreadPoolExecutor(limiterMap.size(), new ThreadFactoryBuilder().setNameFormat("WaterScheduler").build());
     }
 
     public static AbstractLimiter getLeakyBucketLimiter(String name) {
@@ -39,23 +37,23 @@ public class LimiterFactory {
     }
 
     public static AbstractLimiter getLeakyBucketLimiter(LimiterRule rule) {
-        if(limiterMap.get(rule.getName())==null){
-            synchronized (LimiterFactory.class){
-                if (limiterMap.get(rule.getName())==null){
+        if (limiterMap.get(rule.getName()) == null) {
+            synchronized (LimiterFactory.class) {
+                if (limiterMap.get(rule.getName()) == null) {
                     LeakyBucketLimiter limiter = new LeakyBucketLimiter(rule);
-                    limiterMap.put(rule.getName(),limiter);
-                    executor.scheduleAtFixedRate(()->{
-                        synchronized (limiter){
+                    limiterMap.put(rule.getName(), limiter);
+                    executor.scheduleAtFixedRate(() -> {
+                        synchronized (limiter) {
                             AtomicInteger water = limiter.getWater();
-                            water.set(Math.max(0,water.get()-limiter.getRule().getRate()));
+                            water.set(Math.max(0, water.get() - limiter.getRule().getRate()));
                         }
-                    },0,rule.getPeriod(),rule.getTimeUnit());
+                    }, 0, rule.getPeriod(), rule.getTimeUnit());
                     return limiter;
-                }else {
+                } else {
                     return limiterMap.get(rule.getName());
                 }
             }
-        }else {
+        } else {
             return limiterMap.get(rule.getName());
         }
     }

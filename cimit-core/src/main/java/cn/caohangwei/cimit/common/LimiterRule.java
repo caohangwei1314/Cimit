@@ -26,6 +26,7 @@ public class LimiterRule {
         this.name = name;
         this.capacity = capacity;
         this.rate = rate;
+        this.period = period;
         this.timeUnit = timeUnit;
     }
 

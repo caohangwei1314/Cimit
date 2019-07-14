@@ -14,21 +14,36 @@ import java.util.concurrent.TimeUnit;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Limiter {
+public @interface Cimit {
 
     /**
-     * @return Maximum capacity of bucket.
+     * @return Limiter name
+     */
+    String value();
+
+    /**
+     * @return Maximum bucket capacity
      */
     int capacity() default 1000;
 
     /**
-     * @return Speed of production or reduction per unit time.
+     * @return Limiter rate.
      */
     int rate() default 100;
 
     /**
-     * @return Time unit.
+     * @return Several unit time.
+     */
+    int period() default 1;
+
+    /**
+     * @return Unit of time.
      */
     TimeUnit timeUnit() default TimeUnit.SECONDS;
+
+    /**
+     * @return Whether to wait.
+     */
+    boolean waiting() default false;
 
 }

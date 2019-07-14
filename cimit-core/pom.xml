@@ -5,12 +5,11 @@
     <parent>
         <artifactId>Cimit</artifactId>
         <groupId>cn.caohangwei</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cimit-core</artifactId>
-
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->

@@ -5,11 +5,50 @@
     <parent>
         <artifactId>Cimit</artifactId>
         <groupId>cn.caohangwei</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cimit-aspectj</artifactId>
 
+    <properties>
+        <aspectj.version>1.9.2</aspectj.version>
+
+        <spring.test.version>5.1.5.RELEASE</spring.test.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.caohangwei</groupId>
+            <artifactId>cimit-core</artifactId>
+            <version>0.2.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.test.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
