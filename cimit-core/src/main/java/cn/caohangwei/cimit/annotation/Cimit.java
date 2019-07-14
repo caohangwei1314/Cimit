@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CimitRule {
+public @interface Limiter {
 
     /**
      * @return Maximum capacity of bucket.
