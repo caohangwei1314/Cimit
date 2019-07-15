@@ -16,6 +16,7 @@ Cimit 具有以下特点：
 ## 快速开始
 
 ### 1. 注解方式
+
 注解 `@Cimit` 定义了一个限流器，它具有以下属性：
 - `value`: 限流器名称。这是一个唯一属性，通过给方法设置不同的名称来创建多个限流器。（注意：使用相同名称的注解会共享同一个限流器规则）
 - `capacity`: 限流器最大桶容量。此属性可以限制最大请求数量，超过容量的请求将直接拒绝。
@@ -25,6 +26,20 @@ Cimit 具有以下特点：
 - `waiting`: 限流器拒绝策略。默认请求直接拒绝，通过设置为 true 变为等待策略。
 
 例子：
+
+添加 Spring AOP 配置：
+```java
+@Configuration
+public class CimitAspectConfiguration {
+
+    @Bean
+    public CimitAspect cimitAspect() {
+        return new CimitAspect();
+    }
+}
+```
+
+添加注解 `@Cimit`：
 ```java
 @Cimit(value = "Cimit", capacity = 1000, rate = 100, period = 1, timeUnit = TimeUnit.SECONDS)
 public void example() {
@@ -60,6 +75,7 @@ if (limiter.acquire()) {
 
 - [x] ~~注解功能~~
 - [ ] 分布式限流
+- [ ] 降级策略
 - [ ] 手动开关
 - [ ] 实时监控
 
