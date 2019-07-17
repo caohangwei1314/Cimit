@@ -16,13 +16,13 @@ public abstract class AbstractLimiter {
      *
      * @return boolean
      */
-    abstract boolean acquire();
+    public abstract boolean acquire();
 
     /**
      * try to inject the bucket with water.if bucket if full,return false,ortherwise return true.
      *
      * @return boolean
      */
-    abstract boolean tryAcquire();
+    public abstract boolean tryAcquire();
 
 }
