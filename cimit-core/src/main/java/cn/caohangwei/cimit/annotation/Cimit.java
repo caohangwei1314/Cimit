@@ -46,4 +46,9 @@ public @interface Cimit {
      */
     boolean waiting() default false;
 
+    /**
+     * @return Enable distributed or not.
+     */
+    boolean distributed() default false;
+
 }
