@@ -17,4 +17,6 @@ public class Constants {
     public static final int DEFAULT_PERIOD = 1;
 
     public static final TimeUnit DEFAULT_TIME_UNIT = TimeUnit.SECONDS;
+
+    public static final String CIMIT_SERVER_URL = "cimit.server.url";
 }
