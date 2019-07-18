@@ -14,6 +14,8 @@ public class LimiterRule {
 
     TimeUnit timeUnit;
 
+    boolean distributed;
+
     public LimiterRule(String name) {
         this.name = name;
         this.capacity = Constants.DEFAULT_CAPACITY;
@@ -22,12 +24,13 @@ public class LimiterRule {
         this.timeUnit = Constants.DEFAULT_TIME_UNIT;
     }
 
-    public LimiterRule(String name, int capacity, int rate, int period, TimeUnit timeUnit) {
+    public LimiterRule(String name, int capacity, int rate, int period, TimeUnit timeUnit,boolean distributed) {
         this.name = name;
         this.capacity = capacity;
         this.rate = rate;
         this.period = period;
         this.timeUnit = timeUnit;
+        this.distributed = distributed;
     }
 
     public String getName() {
