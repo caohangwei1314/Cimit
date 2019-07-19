@@ -8,12 +8,21 @@
 
 Cimit 具有以下特点：
 
+- **分布式限流**：通过发票服务器方式，统一管理流量请求。
 - **自定义规则**：针对不同的临界资源，可以自定义不同的限流规则。
 - **漏桶算法**：漏桶算法 (Leaky Bucket) 能够强行限制流量的传输速率，平滑网络的突发流量。
 - **细粒度**：能够很好的适应业务代码。
 - **注解**：一个注解轻松搞定。
 
 ## 快速开始
+
+### 分布式配置
+如果要使用分布式限流的功能，需要启动 `cimit-server` 服务作为发票服务器，同时需要在 `resource` 资源目录下创建 `cimit.properties` 文件，并在里面配置发票服务器的 IP 地址和端口号。
+
+cimit.properties 文件配置如下：
+```java
+cimit.server.url = localhost:8080
+```
 
 ### 1. 注解方式
 
@@ -24,6 +33,7 @@ Cimit 具有以下特点：
 - `period`: 限流器响应时间。自定义响应时间。
 - `timeUnit`: 限流器响应时间单位。可以支持纳秒级别以上的时间单位。
 - `waiting`: 限流器拒绝策略。默认请求直接拒绝，通过设置为 true 变为等待策略。
+- `distributed`: 分布式限流器。默认为单机版，通过设置为 true 变为分布式限流。
 
 例子：
 
@@ -49,7 +59,7 @@ public void example() {
 ### 2. 手动创建
 自定义规则：
 ```java
-CimitRule rule = new CimitRule("Cimit",1000,1000,1, TimeUnit.SECONDS);
+CimitRule rule = new CimitRule("Cimit", 1000, 1000, 1, TimeUnit.SECONDS, false);
 ```
 通过 `CimitFactory` 工厂创建相应的限流器：
 ``` java
@@ -74,7 +84,7 @@ if (limiter.acquire()) {
 ## 待办事项
 
 - [x] ~~注解功能~~
-- [ ] 分布式限流
+- [x] ~~分布式限流~~
 - [ ] 降级策略
 - [ ] 手动开关
 - [ ] 实时监控
