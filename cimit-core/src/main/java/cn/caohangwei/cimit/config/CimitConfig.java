@@ -1,5 +1,7 @@
 package cn.caohangwei.cimit.config;
 
+import cn.caohangwei.cimit.common.Constants;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -13,6 +15,8 @@ public class CimitConfig {
     private static final String PREFIX = "classpath:";
 
     private static final String DEFAULT_CIMIT_CONFIG_PATH = "classpath:cimit.properties";
+
+    private static final String DEFAULT_URL = "localhost:8080";
 
     private static Properties properties = new Properties();
 
@@ -37,7 +41,8 @@ public class CimitConfig {
             e.printStackTrace();
         }
         if(list.isEmpty()){
-            return ;
+            Properties p = new Properties();
+            p.setProperty(Constants.CIMIT_SERVER_URL,DEFAULT_URL);
         }
         for(URL url : list){
             Properties p = new Properties();
