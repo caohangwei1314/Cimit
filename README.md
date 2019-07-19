@@ -49,11 +49,11 @@ public void example() {
 ### 2. 手动创建
 自定义规则：
 ```java
-LimiterRule rule = new LimiterRule("Cimit",1000,1000,1, TimeUnit.SECONDS);
+CimitRule rule = new CimitRule("Cimit",1000,1000,1, TimeUnit.SECONDS);
 ```
-通过 `LimiterFactory` 工厂创建相应的限流器：
+通过 `CimitFactory` 工厂创建相应的限流器：
 ``` java
-LeakyBucketLimiter limiter = (LeakyBucketLimiter) LimiterFactory.getLeakyBucketLimiter(rule);
+LeakyBucketLimiter limiter = (LeakyBucketLimiter) CimitFactory.getLeakyBucketLimiter(rule);
 ```
 
 该限流器有两种方法 `tryAcquire` 和 `acquire`，`tryAcquire` 将会尝试去往漏桶中添加水（流量），如果桶的剩余流量不足便会返回 false。
