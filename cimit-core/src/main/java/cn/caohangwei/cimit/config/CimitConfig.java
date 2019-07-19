@@ -10,6 +10,12 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * Initialize the load Limiter configuration.
+ *
+ * @author PinuoC
+ * @since 0.3.0
+ */
 public class CimitConfig {
 
     private static final String PREFIX = "classpath:";

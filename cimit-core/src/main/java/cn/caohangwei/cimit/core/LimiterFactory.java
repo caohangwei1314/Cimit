@@ -3,8 +3,6 @@ package cn.caohangwei.cimit.core;
 
 import cn.caohangwei.cimit.common.LimiterRule;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,6 +22,8 @@ public class LimiterFactory {
 
     private static ScheduledExecutorService executor;
 
+    private static final String DISTRIBUTED = "distributed";
+
     static {
         init();
     }
@@ -37,6 +37,9 @@ public class LimiterFactory {
     }
 
     public static AbstractLimiter getLeakyBucketLimiter(LimiterRule rule) {
+        if (rule.getDistributed()) {
+            return getDistributedLimiter(rule);
+        }
         if (limiterMap.get(rule.getName()) == null) {
             synchronized (LimiterFactory.class) {
                 if (limiterMap.get(rule.getName()) == null) {
@@ -55,6 +58,22 @@ public class LimiterFactory {
             }
         } else {
             return limiterMap.get(rule.getName());
+        }
+    }
+
+    private static AbstractLimiter getDistributedLimiter(LimiterRule rule) {
+        if (limiterMap.get(DISTRIBUTED) == null) {
+            synchronized (LimiterFactory.class) {
+                if (limiterMap.get(DISTRIBUTED) == null) {
+                    DistributedLimiter limiter = new DistributedLimiter(rule);
+                    limiterMap.put(DISTRIBUTED, limiter);
+                    return limiter;
+                } else {
+                    return limiterMap.get(DISTRIBUTED);
+                }
+            }
+        } else {
+            return limiterMap.get(DISTRIBUTED);
         }
     }
 

@@ -11,6 +11,12 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 
+/**
+ * Encapsulates the apache http components class and sends a post request.
+ *
+ * @author PinuoC
+ * @since 0.3.0
+ */
 public class HttpUtil {
 
     private static volatile CloseableHttpClient httpClient = HttpClients.createDefault();

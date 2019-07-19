@@ -1,20 +1,36 @@
 package cn.caohangwei.cimit.common;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-public class LimiterRule {
+/**
+ * Custom rule.
+ *
+ * @author PinuoC
+ * @since 0.2.0
+ */
+public class LimiterRule implements Serializable {
 
-    String name;
+    private String name;
 
-    int capacity;
+    private int capacity;
 
-    int rate;
+    private int rate;
 
-    int period;
+    private int period;
 
-    TimeUnit timeUnit;
+    private TimeUnit timeUnit;
 
-    boolean distributed;
+    private transient boolean distributed;
+
+    public LimiterRule(){
+        this.name = "cimit";
+        this.capacity = Constants.DEFAULT_CAPACITY;
+        this.rate = Constants.DEFAULT_RATE;
+        this.period = Constants.DEFAULT_PERIOD;
+        this.timeUnit = Constants.DEFAULT_TIME_UNIT;
+        this.distributed = false;
+    }
 
     public LimiterRule(String name) {
         this.name = name;
@@ -73,14 +89,22 @@ public class LimiterRule {
         this.timeUnit = timeUnit;
     }
 
+    public boolean getDistributed() {
+        return distributed;
+    }
+
+    public void setDistributed(boolean distributed) {
+        this.distributed = distributed;
+    }
+
     @Override
     public String toString() {
-        return "CimitRule {" +
-                "name=" + name +
-                ", capacity=" + capacity +
-                ", rate=" + rate +
-                ", period=" + period +
-                ", timeUnit=" + timeUnit +
-                "}";
+        return "{" +
+                "\"name\":\"" + name +
+                "\",\"capacity\":" + capacity +
+                ",\"rate\":" + rate +
+                ",\"period\":" + period +
+                ",\"timeUnit\":\"" + timeUnit +
+                "\"}";
     }
 }
