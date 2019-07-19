@@ -1,7 +1,7 @@
 package cn.caohangwei.cimit.core;
 
 import cn.caohangwei.cimit.common.Constants;
-import cn.caohangwei.cimit.common.LimiterRule;
+import cn.caohangwei.cimit.common.CimitRule;
 import cn.caohangwei.cimit.config.CimitConfig;
 import cn.caohangwei.cimit.util.HttpUtil;
 import org.slf4j.Logger;
@@ -25,9 +25,9 @@ public class DistributedLimiter extends AbstractLimiter{
 
     private static final String TRY_ACQUIRE = URL + "/tryAcquire";
 
-    private LimiterRule rule;
+    private CimitRule rule;
 
-    public DistributedLimiter(LimiterRule rule){
+    public DistributedLimiter(CimitRule rule){
         this.rule = rule;
     }
 

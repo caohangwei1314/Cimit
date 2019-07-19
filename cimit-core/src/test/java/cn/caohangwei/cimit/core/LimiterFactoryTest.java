@@ -1,13 +1,9 @@
 package cn.caohangwei.cimit.core;
 
-import cn.caohangwei.cimit.common.LimiterRule;
+import cn.caohangwei.cimit.common.CimitRule;
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LimiterFactoryTest {
 
@@ -30,7 +26,7 @@ class LimiterFactoryTest {
 
     @Test
     void distributed(){
-        LimiterRule rule = new LimiterRule("distributed",10,10,1, TimeUnit.SECONDS,true);
+        CimitRule rule = new CimitRule("distributed",10,10,1, TimeUnit.SECONDS,true);
         AbstractLimiter limiter = LimiterFactory.getLeakyBucketLimiter(rule);
         limiter.tryAcquire();
         for(int i=0;i<20;i++){

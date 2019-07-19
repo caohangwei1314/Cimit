@@ -1,11 +1,11 @@
 package cn.caohangwei.cimit.server.service;
 
-import cn.caohangwei.cimit.common.LimiterRule;
+import cn.caohangwei.cimit.common.CimitRule;
 
 public interface CimitService {
 
-    boolean acquire(LimiterRule rule);
+    boolean acquire(CimitRule rule);
 
-    boolean tryAcquire(LimiterRule rule);
+    boolean tryAcquire(CimitRule rule);
 
 }

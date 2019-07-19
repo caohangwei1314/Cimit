@@ -1,14 +1,8 @@
 package cn.caohangwei.cimit.core;
 
-import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import cn.caohangwei.cimit.common.LimiterRule;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import cn.caohangwei.cimit.common.CimitRule;
 
 /**
  * Current limiting based on leaky bucket algorithms
@@ -20,9 +14,9 @@ public class LeakyBucketLimiter extends AbstractLimiter {
 
     private AtomicInteger water = new AtomicInteger(0);
 
-    private LimiterRule rule;
+    private CimitRule rule;
 
-    public LeakyBucketLimiter(LimiterRule rule) {
+    public LeakyBucketLimiter(CimitRule rule) {
         this.rule = rule;
     }
 
@@ -30,7 +24,7 @@ public class LeakyBucketLimiter extends AbstractLimiter {
         return water;
     }
 
-    public LimiterRule getRule() {
+    public CimitRule getRule() {
         return rule;
     }
 

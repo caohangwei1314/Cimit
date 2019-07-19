@@ -1,7 +1,7 @@
 package cn.caohangwei.cimit.core;
 
 
-import cn.caohangwei.cimit.common.LimiterRule;
+import cn.caohangwei.cimit.common.CimitRule;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.Map;
@@ -33,10 +33,10 @@ public class LimiterFactory {
     }
 
     public static AbstractLimiter getLeakyBucketLimiter(String name) {
-        return getLeakyBucketLimiter(new LimiterRule(name));
+        return getLeakyBucketLimiter(new CimitRule(name));
     }
 
-    public static AbstractLimiter getLeakyBucketLimiter(LimiterRule rule) {
+    public static AbstractLimiter getLeakyBucketLimiter(CimitRule rule) {
         if (rule.getDistributed()) {
             return getDistributedLimiter(rule);
         }
@@ -61,7 +61,7 @@ public class LimiterFactory {
         }
     }
 
-    private static AbstractLimiter getDistributedLimiter(LimiterRule rule) {
+    private static AbstractLimiter getDistributedLimiter(CimitRule rule) {
         if (limiterMap.get(DISTRIBUTED) == null) {
             synchronized (LimiterFactory.class) {
                 if (limiterMap.get(DISTRIBUTED) == null) {

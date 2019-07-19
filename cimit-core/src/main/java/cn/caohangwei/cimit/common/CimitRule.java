@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * @author PinuoC
  * @since 0.2.0
  */
-public class LimiterRule implements Serializable {
+public class CimitRule implements Serializable {
 
     private String name;
 
@@ -23,7 +23,7 @@ public class LimiterRule implements Serializable {
 
     private transient boolean distributed;
 
-    public LimiterRule(){
+    public CimitRule(){
         this.name = "cimit";
         this.capacity = Constants.DEFAULT_CAPACITY;
         this.rate = Constants.DEFAULT_RATE;
@@ -32,7 +32,7 @@ public class LimiterRule implements Serializable {
         this.distributed = false;
     }
 
-    public LimiterRule(String name) {
+    public CimitRule(String name) {
         this.name = name;
         this.capacity = Constants.DEFAULT_CAPACITY;
         this.rate = Constants.DEFAULT_RATE;
@@ -40,7 +40,7 @@ public class LimiterRule implements Serializable {
         this.timeUnit = Constants.DEFAULT_TIME_UNIT;
     }
 
-    public LimiterRule(String name, int capacity, int rate, int period, TimeUnit timeUnit,boolean distributed) {
+    public CimitRule(String name, int capacity, int rate, int period, TimeUnit timeUnit, boolean distributed) {
         this.name = name;
         this.capacity = capacity;
         this.rate = rate;
