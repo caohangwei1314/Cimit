@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author PinuoC
  * @since 0.1.0
  */
-public class LimiterFactory {
+public class CimitFactory {
 
     private static volatile Map<String, AbstractLimiter> limiterMap = new ConcurrentHashMap<>();
 
@@ -41,7 +41,7 @@ public class LimiterFactory {
             return getDistributedLimiter(rule);
         }
         if (limiterMap.get(rule.getName()) == null) {
-            synchronized (LimiterFactory.class) {
+            synchronized (CimitFactory.class) {
                 if (limiterMap.get(rule.getName()) == null) {
                     LeakyBucketLimiter limiter = new LeakyBucketLimiter(rule);
                     limiterMap.put(rule.getName(), limiter);
@@ -63,7 +63,7 @@ public class LimiterFactory {
 
     private static AbstractLimiter getDistributedLimiter(CimitRule rule) {
         if (limiterMap.get(DISTRIBUTED) == null) {
-            synchronized (LimiterFactory.class) {
+            synchronized (CimitFactory.class) {
                 if (limiterMap.get(DISTRIBUTED) == null) {
                     DistributedLimiter limiter = new DistributedLimiter(rule);
                     limiterMap.put(DISTRIBUTED, limiter);

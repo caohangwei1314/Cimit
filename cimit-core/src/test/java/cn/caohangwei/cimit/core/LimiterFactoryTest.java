@@ -9,7 +9,7 @@ class LimiterFactoryTest {
 
     @Test
     void getLeakyBucketLimiter() {
-        LeakyBucketLimiter limiter = (LeakyBucketLimiter) LimiterFactory.getLeakyBucketLimiter("Cimit");
+        LeakyBucketLimiter limiter = (LeakyBucketLimiter) CimitFactory.getLeakyBucketLimiter("Cimit");
         for (int i = 0; i < 20; i++) {
             new Thread(() -> {
                 if (limiter.tryAcquire()) {
@@ -27,7 +27,7 @@ class LimiterFactoryTest {
     @Test
     void distributed(){
         CimitRule rule = new CimitRule("distributed",10,10,1, TimeUnit.SECONDS,true);
-        AbstractLimiter limiter = LimiterFactory.getLeakyBucketLimiter(rule);
+        AbstractLimiter limiter = CimitFactory.getLeakyBucketLimiter(rule);
         limiter.tryAcquire();
         for(int i=0;i<20;i++){
             new Thread(()->{

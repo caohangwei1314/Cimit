@@ -3,7 +3,7 @@ package cn.caohangwei.cimit.annotation.aspectj;
 import cn.caohangwei.cimit.annotation.Cimit;
 import cn.caohangwei.cimit.common.CimitRule;
 import cn.caohangwei.cimit.core.LeakyBucketLimiter;
-import cn.caohangwei.cimit.core.LimiterFactory;
+import cn.caohangwei.cimit.core.CimitFactory;
 import cn.caohangwei.cimit.exception.OutOfBucketException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -38,7 +38,7 @@ public class CimitAspect {
             method = clazz.getDeclaredMethod(signature.getName(), signature.getParameterTypes());
             Cimit cimit = method.getAnnotation(Cimit.class);
             CimitRule rule = new CimitRule(cimit.value(), cimit.capacity(), cimit.rate(), cimit.period(), cimit.timeUnit(),cimit.distributed());
-            LeakyBucketLimiter limiter = (LeakyBucketLimiter) LimiterFactory.getLeakyBucketLimiter(rule);
+            LeakyBucketLimiter limiter = (LeakyBucketLimiter) CimitFactory.getLeakyBucketLimiter(rule);
             if (cimit.waiting() && !limiter.acquire()) {
                 throw new OutOfBucketException("Overflow in the bucket,rejecting the request");
             }
