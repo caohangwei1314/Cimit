@@ -1,4 +1,6 @@
-# Cimit : Application Current Limit
+<image src="https://pinuoc.oss-cn-hangzhou.aliyuncs.com/blog/Cimit.png?Expires=1563681811&OSSAccessKeyId=TMP.hWJzi2uW7W2AdPbZvNcq4GkHCTRijzUhuSbsFskZ7Rd42cub8MyB1cQYaGN6jASBUdCbKZsBso9B8eefRYHwR3L1GjWEwEJwAsMA8HVnFR6CnP1rD9FVEXgv1reM1m.tmp&Signature=hoechXec%2FgwwaXhidMIs1PE65TM%3D" alt="Cimit logo" width="50%">
+
+# Cimit: Application Current Limit
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Author](https://img.shields.io/badge/Author-PinuoC-67C23A.svg)](https://caohangwei.cn/)
