@@ -1,4 +1,4 @@
-<image src="https://pinuoc.oss-cn-hangzhou.aliyuncs.com/blog/Cimit.png" alt="Cimit logo" width="50%">
+<image src="https://pinuoc.oss-cn-hangzhou.aliyuncs.com/blog/Cimit.png" alt="Cimit logo">
 
 # Cimit: Application Current Limit
 
