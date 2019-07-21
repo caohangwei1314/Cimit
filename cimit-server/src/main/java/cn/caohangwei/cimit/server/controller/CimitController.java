@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Get the remaining capacity of the bucket.
+ *
+ * @author PinuoC
+ * @since 0.3.0
+ */
 @RestController
 public class CimitController {
 
@@ -21,7 +27,6 @@ public class CimitController {
 
     @RequestMapping(value = "/tryAcquire", method = RequestMethod.POST)
     public String tryAcquire(@RequestBody CimitRule rule){
-        System.out.println("*******");
         return String.valueOf(cimitService.tryAcquire(rule));
     }
 

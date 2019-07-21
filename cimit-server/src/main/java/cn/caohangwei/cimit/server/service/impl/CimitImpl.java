@@ -5,6 +5,12 @@ import cn.caohangwei.cimit.core.CimitFactory;
 import cn.caohangwei.cimit.server.service.CimitService;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of CimitService.
+ *
+ * @author PinuoC
+ * @since 0.3.0
+ */
 @Service
 public class CimitImpl implements CimitService {
 
