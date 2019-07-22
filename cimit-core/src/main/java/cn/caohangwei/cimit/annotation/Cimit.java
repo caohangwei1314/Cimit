@@ -51,4 +51,8 @@ public @interface Cimit {
      */
     boolean distributed() default false;
 
+    /**
+     * @return Downgrade method name.
+     */
+    String downgrade() default "";
 }

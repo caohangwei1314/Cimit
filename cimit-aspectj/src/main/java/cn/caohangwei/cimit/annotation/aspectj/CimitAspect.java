@@ -34,9 +34,11 @@ public class CimitAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Class clazz = joinPoint.getTarget().getClass();
         Method method = null;
+        String downgrade = null;
         try {
             method = clazz.getDeclaredMethod(signature.getName(), signature.getParameterTypes());
             Cimit cimit = method.getAnnotation(Cimit.class);
+            downgrade = cimit.downgrade();
             CimitRule rule = new CimitRule(cimit.value(), cimit.capacity(), cimit.rate(), cimit.period(), cimit.timeUnit(),cimit.distributed());
             LeakyBucketLimiter limiter = (LeakyBucketLimiter) CimitFactory.getLeakyBucketLimiter(rule);
             if (cimit.waiting() && !limiter.acquire()) {
@@ -47,10 +49,21 @@ public class CimitAspect {
             }
             return joinPoint.proceed();
         } catch (NoSuchMethodException e) {
-            logger.debug(clazz.getName() + " Error: " + e.getMessage());
+            logger.debug(clazz.getName() + " Exception: " + e.getMessage());
+            throw e;
+        }catch (OutOfBucketException e){
+            if(downgrade != null && !"".equals(downgrade)){
+                Method[] methods = clazz.getDeclaredMethods();
+                for(Method m : methods){
+                    if(m.getName().equals(downgrade)){
+                        return m.invoke(null,joinPoint.getArgs());
+                    }
+                }
+            }
+            logger.debug(clazz.getName() + " OutOfBucketException: " + e.getMessage());
             throw e;
         } catch (Throwable e) {
-            logger.debug(method.getName() + " Error: " + e.getMessage());
+            logger.debug(method.getName() + " Exception: " + e.getMessage());
             throw e;
         }
     }
