@@ -56,7 +56,7 @@ public class CimitAspect {
                 Method[] methods = clazz.getDeclaredMethods();
                 for(Method m : methods){
                     if(m.getName().equals(downgrade)){
-                        return m.invoke(null,joinPoint.getArgs());
+                        return m.invoke(joinPoint.getTarget(),joinPoint.getArgs());
                     }
                 }
             }

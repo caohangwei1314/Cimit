@@ -11,6 +11,7 @@
     <modules>
         <module>cimit-core</module>
         <module>cimit-aspectj</module>
+        <module>cimit-demo</module>
     </modules>
 
     <dependencies>
