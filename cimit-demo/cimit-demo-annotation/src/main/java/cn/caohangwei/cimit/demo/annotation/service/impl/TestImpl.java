@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 public class TestImpl implements TestService {
 
     @Override
-    @Cimit(value = "demo",capacity = 10,rate = 10,downgrade = "downGrade")
+    @Cimit(value = "demo", capacity = 10, rate = 10, downgrade = "downGrade")
     public String test(String name) {
         return "welcome " + name;
     }
 
-    public String downGrade(String name){
+    public String downGrade(String name) {
         return "downGrade " + name;
     }
 }

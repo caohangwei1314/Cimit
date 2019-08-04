@@ -1,7 +1,6 @@
 package cn.caohangwei.cimit.demo.annotation.controller;
 
 import cn.caohangwei.cimit.demo.annotation.service.TestService;
-import cn.caohangwei.cimit.demo.annotation.service.impl.TestImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,7 @@ public class TestController {
     private TestService testService;
 
     @GetMapping("/welcome/{name}")
-    public String hello(@PathVariable("name") String name){
+    public String hello(@PathVariable("name") String name) {
         return testService.test(name);
     }
 

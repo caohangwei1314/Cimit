@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class AopConfiguration {
 
     @Bean
-    public CimitAspect cimitAspect(){
+    public CimitAspect cimitAspect() {
         return new CimitAspect();
     }
 
