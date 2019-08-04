@@ -13,8 +13,9 @@ Cimit 具有以下特点：
 - **分布式限流**：通过发票服务器方式，统一管理流量请求。
 - **自定义规则**：针对不同的临界资源，可以自定义不同的限流规则。
 - **漏桶算法**：漏桶算法 (Leaky Bucket) 能够强行限制流量的传输速率，平滑网络的突发流量。
-- **细粒度**：能够很好的适应业务代码。
+- **细粒度**：能够很好的适应业务代码，自定义临界资源。
 - **注解**：一个注解轻松搞定。
+- **降级策略**：用户可根据业务自定义降级方法来应对高并发的流量请求。
 
 ## 快速开始
 
@@ -83,11 +84,29 @@ if (limiter.acquire()) {
 }
 ```
 
+### 降级策略
+当系统面临突发流量并无法做出处理时可通过自定义降级方法来响应请求。通过在使用限流器的当前类中自定义降级方法来实现该功能。
+```java
+@Service
+public class TestImpl implements TestService {
+
+    @Override
+    @Cimit(value = "demo", capacity = 10, rate = 10, downgrade = "downGrade")
+    public String test(String name) {
+        return "welcome " + name;
+    }
+
+    public String downGrade(String name) {
+        return "downGrade " + name;
+    }
+}
+```
+
 ## 待办事项
 
 - [x] ~~注解功能~~
 - [x] ~~分布式限流~~
-- [ ] 降级策略
+- [x] ~~降级策略~~
 - [ ] 手动开关
 - [ ] 实时监控
 
