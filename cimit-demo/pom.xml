@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>cimit-demo</artifactId>
-
+    <modules>
+        <module>cimit-demo-annotation</module>
+    </modules>
 
 </project>
