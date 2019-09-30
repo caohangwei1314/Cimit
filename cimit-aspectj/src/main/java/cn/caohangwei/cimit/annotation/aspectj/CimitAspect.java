@@ -39,7 +39,7 @@ public class CimitAspect {
             method = clazz.getDeclaredMethod(signature.getName(), signature.getParameterTypes());
             Cimit cimit = method.getAnnotation(Cimit.class);
             downgrade = cimit.downgrade();
-            CimitRule rule = new CimitRule(cimit.value(), cimit.capacity(), cimit.rate(), cimit.period(), cimit.timeUnit(),cimit.distributed());
+            CimitRule rule = new CimitRule(cimit.value(), cimit.capacity(), cimit.rate(), cimit.period(), cimit.timeUnit(),cimit.distributed(),cimit.pollTimes());
             LeakyBucketLimiter limiter = (LeakyBucketLimiter) CimitFactory.getLeakyBucketLimiter(rule);
             if (cimit.waiting() && !limiter.acquire()) {
                 throw new OutOfBucketException("Overflow in the bucket,rejecting the request");

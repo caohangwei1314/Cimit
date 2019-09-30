@@ -19,7 +19,7 @@ public @interface Cimit {
     /**
      * @return Limiter name
      */
-    String value();
+    String value() default "cimit";
 
     /**
      * @return Maximum bucket capacity
@@ -55,4 +55,9 @@ public @interface Cimit {
      * @return Downgrade method name.
      */
     String downgrade() default "";
+
+    /**
+     * @return Poll times.
+     */
+    int pollTimes() default 10;
 }

@@ -3,6 +3,8 @@ package cn.caohangwei.cimit.common;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
+import static cn.caohangwei.cimit.common.Constants.*;
+
 /**
  * Custom rule.
  *
@@ -23,30 +25,40 @@ public class CimitRule implements Serializable {
 
     private transient boolean distributed;
 
+    private int pollTimes;
+
     public CimitRule(){
-        this.name = "cimit";
-        this.capacity = Constants.DEFAULT_CAPACITY;
-        this.rate = Constants.DEFAULT_RATE;
-        this.period = Constants.DEFAULT_PERIOD;
-        this.timeUnit = Constants.DEFAULT_TIME_UNIT;
-        this.distributed = false;
+        this(DEFAULT_LIMIT_NAME,DEFAULT_CAPACITY,DEFAULT_RATE,DEFAULT_PERIOD,DEFAULT_TIME_UNIT,DEFAULT_DISTRIBUTED,DEFAULT_POLL_TIMES);
     }
 
     public CimitRule(String name) {
-        this.name = name;
-        this.capacity = Constants.DEFAULT_CAPACITY;
-        this.rate = Constants.DEFAULT_RATE;
-        this.period = Constants.DEFAULT_PERIOD;
-        this.timeUnit = Constants.DEFAULT_TIME_UNIT;
+        this(name,DEFAULT_CAPACITY,DEFAULT_RATE,DEFAULT_PERIOD,DEFAULT_TIME_UNIT,DEFAULT_DISTRIBUTED,DEFAULT_POLL_TIMES);
     }
 
-    public CimitRule(String name, int capacity, int rate, int period, TimeUnit timeUnit, boolean distributed) {
+    public CimitRule(String name,int capacity) {
+        this(name,capacity,DEFAULT_RATE,DEFAULT_PERIOD,DEFAULT_TIME_UNIT,DEFAULT_DISTRIBUTED,DEFAULT_POLL_TIMES);
+    }
+
+    public CimitRule(String name,int capacity,int rate) {
+        this(name,capacity,rate,DEFAULT_PERIOD,DEFAULT_TIME_UNIT,DEFAULT_DISTRIBUTED,DEFAULT_POLL_TIMES);
+    }
+
+    public CimitRule(String name,int capacity,int rate,int period) {
+        this(name,capacity,rate,period,DEFAULT_TIME_UNIT,DEFAULT_DISTRIBUTED,DEFAULT_POLL_TIMES);
+    }
+
+    public CimitRule(String name,int capacity,int rate,int period,TimeUnit timeUnit) {
+        this(name,capacity,rate,period,timeUnit,DEFAULT_DISTRIBUTED,DEFAULT_POLL_TIMES);
+    }
+
+    public CimitRule(String name, int capacity, int rate, int period, TimeUnit timeUnit, boolean distributed,int pollTimes) {
         this.name = name;
         this.capacity = capacity;
         this.rate = rate;
         this.period = period;
         this.timeUnit = timeUnit;
         this.distributed = distributed;
+        this.pollTimes = pollTimes;
     }
 
     public String getName() {
@@ -97,6 +109,14 @@ public class CimitRule implements Serializable {
         this.distributed = distributed;
     }
 
+    public int getPollTimes() {
+        return pollTimes;
+    }
+
+    public void setPollTimes(int pollTimes) {
+        this.pollTimes = pollTimes;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -105,6 +125,7 @@ public class CimitRule implements Serializable {
                 ",\"rate\":" + rate +
                 ",\"period\":" + period +
                 ",\"timeUnit\":\"" + timeUnit +
+                ",\"pollTimes\":\"" + timeUnit +
                 "\"}";
     }
 }

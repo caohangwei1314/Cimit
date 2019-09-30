@@ -30,14 +30,17 @@ public class LeakyBucketLimiter extends AbstractLimiter {
 
     @Override
     public boolean acquire() {
-        while (true) {
+        int pollTimes = rule.getPollTimes();
+        while (pollTimes>0) {
             int size = water.get();
             if (size < rule.getCapacity()) {
                 if (water.compareAndSet(size, size + 1)) {
                     return true;
                 }
             }
+            pollTimes-=1;
         }
+        return false;
     }
 
     @Override

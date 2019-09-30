@@ -19,7 +19,7 @@ public class DistributedLimiter extends AbstractLimiter{
 
     private static final Logger logger = LoggerFactory.getLogger(DistributedLimiter.class);
 
-    private static final String URL = CimitConfig.getProperties().getProperty(Constants.CIMIT_SERVER_URL);
+    private static final String URL = CimitConfig.getProperties().getProperty(Constants.DEFAULT_CIMIT_SERVER_URL);
 
     private static final String ACQUIRE = URL + "/acquire";
 
