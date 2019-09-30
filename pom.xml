@@ -12,6 +12,7 @@
         <module>cimit-core</module>
         <module>cimit-aspectj</module>
         <module>cimit-demo</module>
+        <module>cimit-server</module>
     </modules>
 
     <dependencies>
