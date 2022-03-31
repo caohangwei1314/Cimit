@@ -11,7 +11,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring.vsersion>2.1.6.RELEASE</spring.vsersion>
+        <spring.vsersion>2.5.12</spring.vsersion>
     </properties>
     <dependencies>
         <dependency>
